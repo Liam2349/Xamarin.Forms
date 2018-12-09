@@ -57,13 +57,11 @@ namespace Xamarin.Forms
 				CalculateLayout(_layoutInformation, x, y, width, height, true);
 			}
 
-			LayoutInformation layoutInformationCopy = _layoutInformation;
-
 			for (var i = 0; i < LogicalChildrenInternal.Count; i++)
 			{
 				var child = (View)LogicalChildrenInternal[i];
-				if (child.IsVisible)
-					LayoutChildIntoBoundingRegion(child, layoutInformationCopy.Plots[i], layoutInformationCopy.Requests[i]);
+                try { if (child.IsVisible) LayoutChildIntoBoundingRegion(child, _layoutInformation.Plots[i], _layoutInformation.Requests[i]); }
+                catch (NullReferenceException) { return; }
 			}
 		}
 
