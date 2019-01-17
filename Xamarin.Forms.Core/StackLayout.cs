@@ -60,8 +60,16 @@ namespace Xamarin.Forms
 			for (var i = 0; i < LogicalChildrenInternal.Count; i++)
 			{
 				var child = (View)LogicalChildrenInternal[i];
-                try { if (child.IsVisible) LayoutChildIntoBoundingRegion(child, _layoutInformation.Plots[i], _layoutInformation.Requests[i]); }
-                catch (NullReferenceException) { return; }
+                try
+				{
+					if (child.IsVisible)
+						LayoutChildIntoBoundingRegion(child, _layoutInformation.Plots[i], _layoutInformation.Requests[i]);
+				}
+                catch (NullReferenceException)
+				{
+					if (_layoutInformation.Plots != null || _layoutInformation.Requests != null) throw;
+					return;
+				}
 			}
 		}
 
