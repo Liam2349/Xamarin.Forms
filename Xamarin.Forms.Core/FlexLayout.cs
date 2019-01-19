@@ -341,18 +341,22 @@ namespace Xamarin.Forms
 
 		void OnChildPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			var item = (sender as FlexLayout)?._root ?? GetFlexItem((BindableObject)sender);
-			if (item == null)
-				return;
-
-			if (e.PropertyName == WidthRequestProperty.PropertyName || e.PropertyName == HeightRequestProperty.PropertyName) {
+			if (e.PropertyName == WidthRequestProperty.PropertyName || e.PropertyName == HeightRequestProperty.PropertyName)
+			{
+				var item = (sender as FlexLayout)?._root ?? GetFlexItem((BindableObject)sender);
+				if (item == null)
+					return;
 				item.Width = ((View)sender).WidthRequest < 0 ? float.NaN : (float)((View)sender).WidthRequest;
 				item.Height = ((View)sender).HeightRequest < 0 ? float.NaN : (float)((View)sender).HeightRequest;
 				InvalidateMeasureInternal(InvalidationTrigger.MeasureChanged);
 				return;
 			}
 
-			if (e.PropertyName == MarginProperty.PropertyName) {
+			if (e.PropertyName == MarginProperty.PropertyName)
+			{
+				var item = (sender as FlexLayout)?._root ?? GetFlexItem((BindableObject)sender);
+				if (item == null)
+					return;
 				var margin = (Thickness)((View)sender).GetValue(MarginProperty);
 				item.MarginLeft = (float)margin.Left;
 				item.MarginTop = (float)margin.Top;
@@ -362,7 +366,11 @@ namespace Xamarin.Forms
 				return;
 			}
 
-			if (e.PropertyName == PaddingProperty.PropertyName) {
+			if (e.PropertyName == PaddingProperty.PropertyName)
+			{
+				var item = (sender as FlexLayout)?._root ?? GetFlexItem((BindableObject)sender);
+				if (item == null)
+					return;
 				var padding = (Thickness)((View)sender).GetValue(PaddingProperty);
 				item.PaddingLeft = (float)padding.Left;
 				item.PaddingTop = (float)padding.Top;
@@ -372,7 +380,11 @@ namespace Xamarin.Forms
 				return;
 			}
 
-			if (e.PropertyName == IsVisibleProperty.PropertyName) {
+			if (e.PropertyName == IsVisibleProperty.PropertyName)
+			{
+				var item = (sender as FlexLayout)?._root ?? GetFlexItem((BindableObject)sender);
+				if (item == null)
+					return;
 				item.IsVisible = (bool)((View)sender).GetValue(IsVisibleProperty);
 				InvalidateMeasureInternal(InvalidationTrigger.MeasureChanged);
 				return;
